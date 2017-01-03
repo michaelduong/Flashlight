@@ -24,21 +24,21 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func buttonTapped(sender: AnyObject) {
+    @IBAction func buttonTapped(_ sender: AnyObject) {
         
         if isOn {
             self.isOn = false
             
-            self.button.setTitle("On", forState: .Normal)
-            self.button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            self.view.backgroundColor = UIColor.blackColor()
+            self.button.setTitle("On", for: .normal)
+            self.button.setTitleColor(UIColor.white, for: .normal)
+            self.view.backgroundColor = UIColor.black
             
         } else {
             self.isOn = true
             
-            self.button.setTitle("Off", forState: .Normal)
-            self.button.setTitleColor(UIColor.blackColor(), forState: .Normal)
-            self.view.backgroundColor = UIColor.whiteColor()
+            self.button.setTitle("Off", for: .normal)
+            self.button.setTitleColor(UIColor.black, for: .normal)
+            self.view.backgroundColor = UIColor.white
         }
     
     }

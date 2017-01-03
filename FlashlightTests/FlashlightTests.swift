@@ -54,13 +54,13 @@ class FlashlightTests: XCTestCase {
 
     }
     
-    func checkStateForVC(vc: ViewController) -> Bool {
+    func checkStateForVC(_ vc: ViewController) -> Bool {
         
         var pass: Bool
         
-        if vc.isOn && vc.view.backgroundColor == UIColor.whiteColor() && vc.button.titleLabel?.text == "Off" {
+        if vc.isOn && vc.view.backgroundColor == UIColor.white && vc.button.titleLabel?.text == "Off" {
             pass = true
-        } else if !vc.isOn && vc.view.backgroundColor == UIColor.blackColor() && vc.button.titleLabel?.text == "On" {
+        } else if !vc.isOn && vc.view.backgroundColor == UIColor.black && vc.button.titleLabel?.text == "On" {
             pass = true
         } else {
             pass = false
