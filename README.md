@@ -21,7 +21,7 @@ Build a view with two states. The first state has a black background and an 'On'
 2. Add a UIButton to the view, set the initial title to 'On'
     * note: System buttons animate title changes, which can break the XCTest included in the project. To pass the test, change your UIButton type to Custom, or update the test to adjust for the animation delay.
 3. Set the view's background color to black
-4. Create ```@IBAction func buttonTapped(sender: AnyObject)``` in your ViewController class
+4. Create ```@IBAction func buttonTapped(_ sender: AnyObject)``` in your ViewController class
 
 ### Flashlight Logic
 
