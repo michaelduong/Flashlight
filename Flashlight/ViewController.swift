@@ -2,46 +2,93 @@
 //  ViewController.swift
 //  Flashlight
 //
-//  Created by Caleb Hicks on 9/23/15.
-//  Copyright © 2015 DevMountain. All rights reserved.
+//  Created by Michael Duong on 1/15/18.
+//  Copyright © 2018 Turnt Labs. All rights reserved.
 //
 
 import UIKit
+import AVFoundation
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var button: UIButton!
     
+    @IBOutlet weak var tapGesture: UITapGestureRecognizer!
+    
     var isOn: Bool = false
+    
+    func toggleTorch(on: Bool) {
+        guard let device = AVCaptureDevice.default(for: .video) else { return }
+        
+        if device.hasTorch {
+            do {
+                try device.lockForConfiguration()
+                
+                if on == true {
+                    device.torchMode = .on
+                } else {
+                    device.torchMode = .off
+                }
+                
+                device.unlockForConfiguration()
+            } catch {
+                print("Torch could not be used")
+            }
+        } else {
+            print("Torch is not available")
+        }
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        UIApplication.shared.statusBarStyle = .lightContent
+        
     }
 
     @IBAction func buttonTapped(_ sender: Any) {
         
         if isOn {
-            self.isOn = false
-            
-            self.button.setTitle("On", for: .normal)
-            self.button.setTitleColor(UIColor.white, for: .normal)
-            self.view.backgroundColor = UIColor.black
-            
-        } else {
-            self.isOn = true
-            
-            self.button.setTitle("Off", for: .normal)
-            self.button.setTitleColor(UIColor.black, for: .normal)
-            self.view.backgroundColor = UIColor.white
+            isOn = false
+            view.backgroundColor = UIColor.black
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.setTitle("ON", for: .normal)
+            UIApplication.shared.statusBarStyle = .lightContent
+            toggleTorch(on: false)
         }
-    
+        
+        else {
+            isOn = true
+            view.backgroundColor = UIColor.white
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.setTitle("OFF", for: .normal)
+            UIApplication.shared.statusBarStyle = .default
+            toggleTorch(on: true)
+
+        }
     }
-  
+    
+    @IBAction func screenTapped(_ sender: Any) {
+        if isOn {
+            isOn = false
+            view.backgroundColor = UIColor.black
+            button.setTitleColor(UIColor.white, for: .normal)
+            button.setTitle("ON", for: .normal)
+            UIApplication.shared.statusBarStyle = .lightContent
+            toggleTorch(on: false)
+        }
+            
+        else {
+            isOn = true
+            view.backgroundColor = UIColor.white
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.setTitle("OFF", for: .normal)
+            UIApplication.shared.statusBarStyle = .default
+            toggleTorch(on: true)
+        }
+    }
 }
+
+
+
 
